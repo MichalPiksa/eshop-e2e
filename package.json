@@ -1,0 +1,22 @@
+{
+  "name": "eshop-e2e",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MichalPiksa/eshop-e2e.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MichalPiksa/eshop-e2e/issues"
+  },
+  "homepage": "https://github.com/MichalPiksa/eshop-e2e#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.55.0",
+    "@types/node": "^24.3.1"
+  }
+}
