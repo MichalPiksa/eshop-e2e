@@ -36,3 +36,11 @@ test-results
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+
+
+# Environment variables
+.env
+.env.*
+
+# VS Code settings
+.vscode/
