@@ -15,5 +15,5 @@ test("Log into eshop", async ({ page}) => {
     await loginPage.loginToApp(VALID_USERNAME!, VALID_PASSWORD!);
 
     const dashboardPage = new DashboardPage(page);
-    await dashboardPage.assertCartIconVisible();
+    await dashboardPage.assertProductHeaderVisible();
 })
