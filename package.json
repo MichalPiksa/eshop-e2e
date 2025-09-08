@@ -17,7 +17,8 @@
   "homepage": "https://github.com/MichalPiksa/eshop-e2e#readme",
   "devDependencies": {
     "@playwright/test": "^1.55.0",
-    "@types/node": "^24.3.1"
+    "@types/node": "^24.3.1",
+    "allure-playwright": "^3.3.3"
   },
   "dependencies": {
     "dotenv": "^17.2.2"
