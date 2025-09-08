@@ -1,9 +1,9 @@
-import { Page, expect } from "@playwright/test";
+import { type Page, expect } from "@playwright/test";
 
 export class DashboardPage
 {
-    private page: Page;
-    private cartIcon = '//*[@id="shopping_cart_container"]/a';
+    readonly page: Page;
+    readonly cartIcon = '//*[@id="shopping_cart_container"]/a';
 
     constructor(page: Page) {
         this.page = page;

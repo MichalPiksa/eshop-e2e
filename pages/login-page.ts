@@ -1,14 +1,14 @@
-import { Page } from "@playwright/test";
+import { type Page } from "@playwright/test";
 
 export class LoginPage 
 {
-    private url = "https://www.saucedemo.com/";
-    private page: Page;
-    private usernameInput = '#user-name';
-    private passwordInput = '#password';
-    private loginButton = '#login-button';
-    private pageTitle = '#root > div > div.login_logo';
-    private errorMessage = 'h3[data-test="error"]';
+    readonly url = "https://www.saucedemo.com/";
+    readonly page: Page;
+    readonly usernameInput = '#user-name';
+    readonly passwordInput = '#password';
+    readonly loginButton = '#login-button';
+    readonly pageTitle = '#root > div > div.login_logo';
+    readonly errorMessage = 'h3[data-test="error"]';
 
     constructor(page: Page) {
         this.page = page;
