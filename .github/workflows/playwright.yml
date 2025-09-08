@@ -13,7 +13,7 @@ jobs:
       VALID_PASSWORD: ${{ secrets.VALID_PASSWORD }}
     strategy:
       matrix:
-        shard: [1/2, 2/2, 3/4, 4/4]
+        shard: [1/4, 2/4, 3/4, 4/4]
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
