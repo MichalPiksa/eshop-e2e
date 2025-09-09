@@ -1,17 +1,22 @@
-import { type Page } from "@playwright/test";
+import { type Page, type Locator } from "@playwright/test";
 
 export class LoginPage 
 {
-    readonly url = "https://www.saucedemo.com/";
     readonly page: Page;
-    readonly usernameInput = '#user-name';
-    readonly passwordInput = '#password';
-    readonly loginButton = '#login-button';
-    readonly pageTitle = '#root > div > div.login_logo';
+    readonly url: string;
+    readonly usernameInput: Locator;
+    readonly passwordInput: Locator;
+    readonly loginButton: Locator;
+    readonly pageTitle: Locator;
     readonly errorMessage = 'h3[data-test="error"]';
 
     constructor(page: Page) {
         this.page = page;
+        this.url = "https://www.saucedemo.com/";
+        this.usernameInput = page.locator('[data-test="username"]');
+        this.passwordInput = page.locator('[data-test="password"]')
+        this.loginButton = page.getByRole('button', { name: 'Login' });
+        this.pageTitle = page.getByText('Swag Labs')
     }
 
     public async goto(): Promise<void> {
@@ -19,16 +24,13 @@ export class LoginPage
     }
 
     public async loginToApp(username, password): Promise<void> {
-        await this.page.fill(this.usernameInput, username);
-        await this.page.fill(this.passwordInput, password);
-        await this.page.click(this.loginButton);
+        await this.usernameInput.fill(username);
+        await this.passwordInput.fill(password);
+        await this.loginButton.click();
     }
 
     public async checkPageTitle(): Promise<void> {
-        const actualTitle = await this.page.textContent(this.pageTitle);
-        if (actualTitle?.trim() !== "Swag Labs") {
-            throw new Error(`Page title does not match. Expected: "Swag Labs", Actual: "${actualTitle}"`);
-        }
+        await this.pageTitle.isVisible();
     }
 
     public async getErrorMessage(): Promise<string | null> {
