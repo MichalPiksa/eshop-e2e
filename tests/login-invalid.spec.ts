@@ -1,6 +1,6 @@
 import * as dotenv from 'dotenv';
 import { test } from '@playwright/test';
-import { LoginPage } from '../pages/login-page';
+import { LoginPage } from '../page-objects/login-page';
 
 dotenv.config();
 

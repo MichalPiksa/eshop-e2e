@@ -1,18 +1,15 @@
 import * as dotenv from 'dotenv';
 import { test } from '@playwright/test';
-import { LoginPage } from '../pages/login-page';
-import { DashboardPage } from '../pages/dashboard-page';
+import { LoginPage } from '../page-objects/login-page';
+import { DashboardPage } from '../page-objects/dashboard-page';
 
 dotenv.config();
 
-// const { VALID_USERNAME, VALID_PASSWORD } = process.env;
-const VALID_USERNAME = "standard_user";
-const VALID_PASSWORD = "secret_sauce";
+const { VALID_USERNAME, VALID_PASSWORD } = process.env;
 
-// if (!VALID_USERNAME || !VALID_PASSWORD) {
-//     throw new Error('Missing VALID_USERNAME or VALID_PASSWORD environment variables');
-// }
-
+if (!VALID_USERNAME || !VALID_PASSWORD) {
+    throw new Error('Missing VALID_USERNAME or VALID_PASSWORD environment variables');
+}
 
 test("Log into eshop", async ({ page}) => {
     const loginPage = new LoginPage(page);

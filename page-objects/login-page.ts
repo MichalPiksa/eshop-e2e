@@ -18,7 +18,7 @@ export class LoginPage
         await this.page.goto(this.url);
     }
 
-    public async loginToApp(username: string, password: string): Promise<void> {
+    public async loginToApp(username, password): Promise<void> {
         await this.page.fill(this.usernameInput, username);
         await this.page.fill(this.passwordInput, password);
         await this.page.click(this.loginButton);
