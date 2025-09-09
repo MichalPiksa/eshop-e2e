@@ -5,7 +5,13 @@ import { DashboardPage } from '../pages/dashboard-page';
 
 dotenv.config();
 
-const { VALID_USERNAME, VALID_PASSWORD } = process.env;
+// const { VALID_USERNAME, VALID_PASSWORD } = process.env;
+const VALID_USERNAME = process.env.VALID_USERNAME;
+const VALID_PASSWORD = process.env.VALID_PASSWORD;
+
+if (!VALID_USERNAME || !VALID_PASSWORD) {
+    throw new Error('Missing VALID_USERNAME or VALID_PASSWORD environment variables');
+}
 
 
 test("Log into eshop", async ({ page}) => {
