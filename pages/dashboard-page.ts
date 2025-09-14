@@ -3,6 +3,7 @@ import { expect, type Page, type Locator } from "@playwright/test";
 export class DashboardPage
 {
     readonly page: Page;
+    readonly url: string;
     readonly productsHeader: Locator;
     readonly addToCartButton: Locator;
     readonly removeButton: Locator;
@@ -11,11 +12,16 @@ export class DashboardPage
 
     constructor(page: Page) {
         this.page = page;
+        this.url = "https://www.saucedemo.com/inventory.html";
         this.productsHeader = page.locator('span.title').filter({ hasText: 'Products' });
         this.addToCartButton = page.getByRole('button', { name: 'Add to cart' }).first();
         this.removeButton = page.getByRole('button', { name: 'Remove' }).first();
         this.cartButton = page.locator('[data-test="shopping-cart-link"]');
         this.openMenuButton = page.getByRole('button', { name: 'Open Menu' });
+    }
+
+    public async goto(): Promise<void> {
+        await this.page.goto(this.url);
     }
 
     public async assertProductHeaderVisible(): Promise<void> {
@@ -36,5 +42,11 @@ export class DashboardPage
 
     public async openMenu(): Promise<void> {
         await this.openMenuButton.click();
+    }
+
+    public async checkItemsInCartButton(expectedCount: number): Promise<void> {
+        const buttonText = await this.cartButton.textContent();
+        const itemCount = buttonText ? parseInt(buttonText) : 0;
+        expect(itemCount).toBe(expectedCount);
     }
 }

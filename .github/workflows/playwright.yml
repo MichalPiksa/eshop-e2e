@@ -36,6 +36,11 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
+      - name: Restore invalid-passwords.json
+        run: |
+          mkdir -p data
+          echo "${{ secrets.INVALID_PASSWORDS_JSON_B64 }}" | base64 -d > data/invalid-passwords.json
+
       - name: Run Playwright tests
         run: npx playwright test --shard ${{ matrix.shard }} --workers=3 --reporter=line,allure-playwright
 
@@ -61,11 +66,14 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           path: reports
+      
+      - name: Install Allure CLI
+        run: npm install -g allure-commandline
 
       - name: Merge Allure results
         run: |
           mkdir merged-allure
-          cp -r reports/allure-results-*/allure-results/* merged-allure/
+          cp -r reports/allure-results-*/* merged-allure/ || true
           npx allure generate merged-allure -o final-allure-report
 
       - uses: actions/upload-artifact@v4
