@@ -1,30 +1,12 @@
 import * as dotenv from 'dotenv';
 import { test } from '@playwright/test';
 import { LoginPage } from '../pages/login-page';
+import invalidPasswordsData from '../data/invalid-passwords.json';
 
 dotenv.config();
 
 const USERNAME = process.env.VALID_USERNAME;
-const INVALID_PASSWORDS = [
-    "wrongpass",
-    "123",
-    "password",
-    " ",
-    "",
-    "    ",
-    "!@#$%^&*()",
-    "<script>alert(1)</script>",
-    "' OR '1'='1",
-    "'; DROP TABLE users; --",
-    "😊😂👍🏽",
-    "veryveryveryveryveryveryveryveryveryverylongpassword",
-    "pass\nword",
-    "pass\tword",
-    "\" OR \"\" = \"",
-    "null",
-    "undefined",
-    "0xDEADBEEF",
-];
+const INVALID_PASSWORDS = invalidPasswordsData.invalidPasswords;
 
 test("Log into eshop with invalid passwords", async ({ page}) => {
     const loginPage = new LoginPage(page);
