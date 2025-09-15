@@ -1,21 +1,14 @@
-import * as dotenv from "dotenv";
 import { test as setup } from "@playwright/test";
-// import { chromium } from "@playwright/test";
 import { LoginPage } from "../pages/login-page";
 import { DashboardPage } from "../pages/dashboard-page";
+import { standardUser } from "../data/credentials";
 
-dotenv.config();
 
-const { VALID_USERNAME, VALID_PASSWORD } = process.env;
-
-if (!VALID_USERNAME || !VALID_PASSWORD) {
-    throw new Error("Missing VALID_USERNAME or VALID_PASSWORD environment variables");
-}
 setup('write login session data', async ({ page }) => {
-    const loginPage = new LoginPage(page);
+    const loginPage = new LoginPage(page, standardUser);
     await loginPage.goto();
     await loginPage.checkPageTitle();
-    await loginPage.loginToApp(VALID_USERNAME!, VALID_PASSWORD!);
+    await loginPage.loginToApp();
 
     const dashboardPage = new DashboardPage(page);
     await page.waitForURL(dashboardPage.url);
