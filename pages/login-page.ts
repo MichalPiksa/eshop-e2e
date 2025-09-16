@@ -9,9 +9,11 @@ export class LoginPage
     readonly loginButton: Locator;
     readonly pageTitle: Locator;
     readonly errorMessage = 'h3[data-test="error"]';
+    readonly user: any;
 
-    constructor(page: Page) {
+    constructor(page: Page, user: any) {
         this.page = page;
+        this.user = user;
         this.url = "https://www.saucedemo.com/";
         this.usernameInput = page.locator('[data-test="username"]');
         this.passwordInput = page.locator('[data-test="password"]')
@@ -23,9 +25,11 @@ export class LoginPage
         await this.page.goto(this.url);
     }
 
-    public async loginToApp(username, password): Promise<void> {
-        await this.usernameInput.fill(username);
-        await this.passwordInput.fill(password);
+    public async loginToApp(username?: string, password?: string): Promise<void> {
+        const u = username ?? this.user.username;
+        const p = password ?? this.user.password;
+        await this.usernameInput.fill(u);
+        await this.passwordInput.fill(p);
         await this.loginButton.click();
     }
 

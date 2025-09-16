@@ -10,9 +10,6 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
-    env:
-      VALID_USERNAME: ${{ secrets.VALID_USERNAME }}
-      VALID_PASSWORD: ${{ secrets.VALID_PASSWORD }}
     strategy:
       matrix:
         include:
@@ -36,10 +33,11 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
-      - name: Restore invalid-passwords.json
+      - name: Restore invalid-passwords.json and credentials.ts
         run: |
           mkdir -p data
           echo "${{ secrets.INVALID_PASSWORDS_JSON_B64 }}" | base64 -d > data/invalid-passwords.json
+          echo "${{ secrets.CREDENTIALS_TS_B64 }}" | base64 -d > data/credentials.ts
 
       - name: Run Playwright tests
         run: npx playwright test --shard ${{ matrix.shard }} --workers=3 --reporter=line,allure-playwright
