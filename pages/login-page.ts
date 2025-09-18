@@ -2,14 +2,14 @@ import { type Page, type Locator } from "@playwright/test";
 
 export class LoginPage 
 {
-    readonly page: Page;
-    readonly url: string;
-    readonly usernameInput: Locator;
-    readonly passwordInput: Locator;
-    readonly loginButton: Locator;
-    readonly pageTitle: Locator;
-    readonly errorMessage = 'h3[data-test="error"]';
-    readonly user: any;
+    private readonly page: Page;
+    private readonly url: string;
+    private readonly usernameInput: Locator;
+    private readonly passwordInput: Locator;
+    private readonly loginButton: Locator;
+    private readonly pageTitle: Locator;
+    private readonly errorMessage = 'h3[data-test="error"]';
+    private readonly user: any;
 
     constructor(page: Page, user: any) {
         this.page = page;

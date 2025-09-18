@@ -2,13 +2,13 @@ import { expect, type Page, type Locator } from "@playwright/test";
 
 export class DashboardPage
 {
-    readonly page: Page;
-    readonly url: string;
-    readonly productsHeader: Locator;
-    readonly addToCartButton: Locator;
-    readonly removeButton: Locator;
-    readonly cartButton: Locator;
-    readonly openMenuButton: Locator;
+    private readonly page: Page;
+    public readonly url: string;
+    private readonly productsHeader: Locator;
+    private readonly addToCartButton: Locator;
+    private readonly removeButton: Locator;
+    private readonly cartButton: Locator;
+    private readonly openMenuButton: Locator;
 
     constructor(page: Page) {
         this.page = page;

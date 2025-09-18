@@ -1,8 +1,6 @@
-import { test } from "@playwright/test";
-import { DashboardPage } from "../pages/dashboard-page";
+import { test } from "../fixtures/test-setup";
 
-test("Add to cart one item", async ({ page }) => {
-    const dashboardPage = new DashboardPage(page);
+test("Add to cart one item", async ({ dashboardPage }) => {
     await dashboardPage.goto();
     await dashboardPage.assertProductHeaderVisible();
     await dashboardPage.addFirstProductToCart();

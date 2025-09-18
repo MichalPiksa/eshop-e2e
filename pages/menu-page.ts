@@ -2,12 +2,12 @@ import { type Page, type Locator } from "@playwright/test";
 
 export class MenuPage
 {
-    readonly page: Page;
-    readonly closeButton: Locator;
-    readonly logoutLink: Locator;
-    readonly allItemsLink: Locator;
-    readonly aboutLink: Locator;
-    readonly resetAppStateLink: Locator;
+    private readonly page: Page;
+    private readonly closeButton: Locator;
+    private readonly logoutLink: Locator;
+    private readonly allItemsLink: Locator;
+    private readonly aboutLink: Locator;
+    private readonly resetAppStateLink: Locator;
     
     constructor(page: Page) {
         this.page = page;

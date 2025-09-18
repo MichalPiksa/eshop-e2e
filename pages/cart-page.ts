@@ -1,11 +1,11 @@
 import { Locator, Page } from '@playwright/test';
 
 export class CartPage {
-    readonly page: Page;
-    readonly cartHeader: Locator;
-    readonly checkoutButton: Locator;
-    readonly continueShoppingButton: Locator;
-    readonly removeButton: Locator;
+    private readonly page: Page;
+    private readonly cartHeader: Locator;
+    private readonly checkoutButton: Locator;
+    private readonly continueShoppingButton: Locator;
+    private readonly removeButton: Locator;
 
     constructor(page: Page) {
         this.page = page;

@@ -1,12 +1,6 @@
-import { test } from "@playwright/test";
-import { DashboardPage } from "../pages/dashboard-page";
-import { MenuPage } from "../pages/menu-page";
-import { LoginPage } from "../pages/login-page";
+import { test } from "../fixtures/test-setup";
 
-test("Log out from the app", async ({ page }) => {
-    const dashboardPage = new DashboardPage(page);
-    const menuPage = new MenuPage(page);
-    const loginPage = new LoginPage(page);
+test("Log out from the app", async ({ dashboardPage, menuPage, loginPage }) => {
     await dashboardPage.goto();
     await dashboardPage.assertProductHeaderVisible();
     await dashboardPage.openMenu();
