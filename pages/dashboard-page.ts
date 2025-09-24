@@ -12,7 +12,7 @@ export class DashboardPage
 
     constructor(page: Page) {
         this.page = page;
-        this.url = "https://www.saucedemo.com/inventory.html";
+        this.url = "/inventory.html";
         this.productsHeader = page.locator('span.title').filter({ hasText: 'Products' });
         this.addToCartButton = page.getByRole('button', { name: 'Add to cart' }).first();
         this.removeButton = page.getByRole('button', { name: 'Remove' }).first();
@@ -48,5 +48,9 @@ export class DashboardPage
         const buttonText = await this.cartButton.textContent();
         const itemCount = buttonText ? parseInt(buttonText) : 0;
         expect(itemCount).toBe(expectedCount);
+    }
+
+    public async captureScreenshot(): Promise<void> {
+        await this.page.screenshot({ path: 'screenshots/dashboard-page.png', fullPage: true });
     }
 }

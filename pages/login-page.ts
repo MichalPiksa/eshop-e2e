@@ -14,7 +14,7 @@ export class LoginPage
     constructor(page: Page, user: any) {
         this.page = page;
         this.user = user;
-        this.url = "https://www.saucedemo.com/";
+        this.url = "/";
         this.usernameInput = page.locator('[data-test="username"]');
         this.passwordInput = page.locator('[data-test="password"]')
         this.loginButton = page.getByRole('button', { name: 'Login' });

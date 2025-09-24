@@ -17,6 +17,9 @@ data/
 # Authentication files
 .auth/
 
+# Screenshot directories
+screenshots/
+
 # Optional npm cache directory
 .npm
 
