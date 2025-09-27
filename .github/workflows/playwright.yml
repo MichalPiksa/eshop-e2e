@@ -93,7 +93,7 @@ jobs:
 
       - name: Merge Playwright reports
         run: |
-          npx playwright merge-reports reports/results-* --reporter html --output merged-playwright
+          npx playwright merge-reports reports/results-* --reporter html --report-dir merged-playwright
 
       - uses: actions/upload-artifact@v4
         with:
