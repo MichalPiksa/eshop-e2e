@@ -1,4 +1,4 @@
-import { test } from "../fixtures/test-setup";
+import { test } from "../../fixtures/test-setup";
 
 test("Log out from the app", async ({ dashboardPage, menuPage, loginPage }) => {
     await dashboardPage.goto();

@@ -1,4 +1,4 @@
-import { test } from "../fixtures/test-setup";
+import { test } from "../../fixtures/test-setup";
 
 test("Add to cart one item", async ({ dashboardPage }) => {
     await dashboardPage.goto();

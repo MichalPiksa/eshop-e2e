@@ -1,6 +1,6 @@
-import { test } from "../fixtures/test-setup";
-import invalidPasswordsData from "../data/invalid-passwords.json";
-import { standardUser } from "../data/credentials";
+import { test } from "../../fixtures/test-setup";
+import invalidPasswordsData from "../../data/invalid-passwords.json";
+import { standardUser } from "../../data/credentials";
 
 const INVALID_PASSWORDS = invalidPasswordsData.invalidPasswords;
 
