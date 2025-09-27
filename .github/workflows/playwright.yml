@@ -40,15 +40,15 @@ jobs:
           echo "${{ secrets.CREDENTIALS_TS_B64 }}" | base64 -d > data/credentials.ts
 
       - name: Run Playwright tests
-        run: npx playwright test --shard ${{ matrix.shard }} --workers=3 --reporter=line,allure-playwright
+        run: npx playwright test --shard ${{ matrix.shard }} --workers=3 --reporter=line,allure-playwright,html --output=results/${{ matrix.label }}
         env:
           BASE_URL: ${{ secrets.BASE_URL_PROD }}
 
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
-          name: playwright-report-${{ matrix.label }}
-          path: playwright-report/
+          name: results-${{ matrix.label }}
+          path: results/${{ matrix.label }}
           retention-days: 30
 
       - uses: actions/upload-artifact@v4
