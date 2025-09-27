@@ -2,7 +2,6 @@ import { defineConfig, devices } from '@playwright/test';
 require('dotenv').config();
 
 
-
 export default defineConfig({
   testDir: './tests',
   /* Run tests in files in parallel */
@@ -14,7 +13,7 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: [["line"], ["allure-playwright"]],
+  reporter: [["line"], ["allure-playwright"], ["html", { outputFolder: "playwright-report" }]],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
@@ -35,12 +34,20 @@ export default defineConfig({
       testMatch: /.*\.setup\.ts/,
     },
     {
-      name: 'behind-login',
+      name: 'e2e tests logged in',
       use: { 
         ...devices['Desktop Chrome'],
         storageState: '.auth/login.json'
       },
       dependencies: ['setup'],
+      testMatch: /logged-in\/.*\.spec\.ts/,
+    },
+    {
+      name: 'e2e tests not logged in',
+      use: { 
+        ...devices['Desktop Chrome'],
+      },
+      testMatch: /logged-out\/.*\.spec\.ts/,
     }
 
     // {
