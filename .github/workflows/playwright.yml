@@ -44,6 +44,7 @@ jobs:
         env:
           BASE_URL: ${{ secrets.BASE_URL_PROD }}
 
+      # Upload raw test results (traces, screenshots, etc.)
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
@@ -51,6 +52,15 @@ jobs:
           path: results/${{ matrix.label }}
           retention-days: 30
 
+      # Upload Playwright HTML report
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: playwright-report-${{ matrix.label }}
+          path: playwright-report/
+          retention-days: 30
+
+      # Upload Allure results
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
@@ -83,8 +93,7 @@ jobs:
 
       - name: Merge Playwright reports
         run: |
-          mkdir merged-playwright
-          cp -r reports/playwright-report-*/playwright-report/* merged-playwright/ || true
+          npx playwright merge-reports reports/results-* --reporter html --output merged-playwright
 
       - uses: actions/upload-artifact@v4
         with:
