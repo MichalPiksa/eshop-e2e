@@ -40,21 +40,20 @@ jobs:
           echo "${{ secrets.CREDENTIALS_TS_B64 }}" | base64 -d > data/credentials.ts
 
       - name: Run Playwright tests
-        run: npx playwright test --shard ${{ matrix.shard }} --workers=3 \
+        run: |
+          npx playwright test --shard ${{ matrix.shard }} --workers=3 \
                --reporter=blob,allure-playwright,line \
-               --output=blob-report
+               --output=blob-report-${{ matrix.label }}
         env:
           BASE_URL: ${{ secrets.BASE_URL_PROD }}
 
-      # Upload blob report for merging HTML later
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
           name: blob-report-${{ matrix.label }}
-          path: blob-report
+          path: blob-report-${{ matrix.label }}
           retention-days: 7
 
-      # Upload allure-results for merging later
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
@@ -75,7 +74,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # Download blob reports for Playwright HTML merge
+      # Merge Blob reports
       - name: Download blob reports
         uses: actions/download-artifact@v4
         with:
@@ -92,7 +91,7 @@ jobs:
           path: playwright-report
           retention-days: 14
 
-      # Download allure results
+      # Merge Allure results
       - name: Download allure results
         uses: actions/download-artifact@v4
         with:
@@ -106,7 +105,7 @@ jobs:
       - name: Merge Allure results
         run: |
           mkdir merged-allure
-          cp -r reports/* merged-allure/ || true
+          cp -r reports/*/* merged-allure/ || true
           npx allure generate merged-allure -o final-allure-report
 
       - uses: actions/upload-artifact@v4
