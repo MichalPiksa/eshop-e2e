@@ -44,14 +44,14 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
-          name: blob-report-${{ matrix.shardIndex }}-${{ matrix.shardTotal }}
+          name: blob-report--part-${{ matrix.shardIndex }}
           path: blob-report/
           retention-days: 7
 
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
-          name: allure-report-${{ matrix.shardIndex }}-${{ matrix.shardTotal }}
+          name: allure-report--part-${{ matrix.shardIndex }}
           path: allure-report/
           retention-days: 7
 
