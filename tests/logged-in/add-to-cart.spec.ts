@@ -1,6 +1,6 @@
 import { test } from "../../fixtures/test-setup";
 
-test("Add to cart one item", async ({ dashboardPage }) => {
+test("Add to cart one item", { tag: ['@prod' , '@dev'] }, async ({ dashboardPage }) => {
     await dashboardPage.goto();
     await dashboardPage.captureScreenshot();
     await dashboardPage.assertProductHeaderVisible();

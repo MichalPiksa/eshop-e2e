@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "pretest": "tsc --noEmit && eslint tests/**",
+    "test": "playwright test"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/MichalPiksa/eshop-e2e.git"
@@ -16,9 +19,14 @@
   },
   "homepage": "https://github.com/MichalPiksa/eshop-e2e#readme",
   "devDependencies": {
+    "@eslint/js": "^9.36.0",
     "@playwright/test": "^1.55.0",
+    "@types/eslint__js": "^8.42.3",
     "@types/node": "^24.3.1",
-    "allure-playwright": "^3.3.3"
+    "allure-playwright": "^3.3.3",
+    "eslint": "^9.36.0",
+    "typescript": "^5.9.2",
+    "typescript-eslint": "^8.45.0"
   },
   "dependencies": {
     "dotenv": "^17.2.2"
