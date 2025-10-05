@@ -42,3 +42,5 @@ export const test = base.extend<TestOptions>({
         password: standardUser.password
     }
 });
+
+export { expect } from '@playwright/test';
