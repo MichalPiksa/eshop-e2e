@@ -1,14 +1,10 @@
 import { test as base } from '@playwright/test';
-import { standardUser } from "../data/credentials";
 import { LoginPage } from '../pages/login-page';
 import { DashboardPage } from '../pages/dashboard-page';
 import { MenuPage } from '../pages/menu-page';
 import { CartPage } from '../pages/cart-page';
+import { User } from '../utils/user';
 
-export type User = {
-    username: string;
-    password: string;
-};
 
 export type TestOptions = {
     loginPage: LoginPage;
@@ -17,7 +13,10 @@ export type TestOptions = {
     cartPage: CartPage;
     user: User;
 };
+
 export const test = base.extend<TestOptions>({
+    user: [{ username: '', password: ''}, {option: true, }],
+
     loginPage: async ({ page, user }, use) => {
         const loginPage = new LoginPage(
             page,
@@ -36,10 +35,6 @@ export const test = base.extend<TestOptions>({
     cartPage: async ({ page }, use) => {
         const cartPage = new CartPage(page);
         await use(cartPage);
-    },
-    user: {
-        username: standardUser.username,
-        password: standardUser.password
     }
 });
 

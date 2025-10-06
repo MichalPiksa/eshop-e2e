@@ -1,4 +1,5 @@
 import { type Page, type Locator } from "@playwright/test";
+import { User } from "../utils/user";
 
 export class LoginPage 
 {
@@ -9,7 +10,7 @@ export class LoginPage
     private readonly loginButton: Locator;
     private readonly pageTitle: Locator;
     private readonly errorMessage = 'h3[data-test="error"]';
-    private readonly user: any;
+    private readonly user: User;
 
     constructor(page: Page, user: any) {
         this.page = page;
