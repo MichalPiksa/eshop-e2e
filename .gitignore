@@ -61,3 +61,7 @@ test-results
 
 # VS Code settings
 .vscode/
+
+# Chatmodes files
+*/chatmodes/
+tests/seed.spec.ts

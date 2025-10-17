@@ -7,12 +7,12 @@ export class LoginPage
     private readonly url: string;
     private readonly usernameInput: Locator;
     private readonly passwordInput: Locator;
-    private readonly loginButton: Locator;
+    public readonly loginButton: Locator;
     private readonly pageTitle: Locator;
-    private readonly errorMessage = 'h3[data-test="error"]';
+    private readonly errorMessage: Locator;
     private readonly user: User;
 
-    constructor(page: Page, user: any) {
+    constructor(page: Page, user: User) {
         this.page = page;
         this.user = user;
         this.url = "/";
@@ -20,6 +20,7 @@ export class LoginPage
         this.passwordInput = page.locator('[data-test="password"]')
         this.loginButton = page.getByRole('button', { name: 'Login' });
         this.pageTitle = page.getByText('Swag Labs')
+        this.errorMessage = page.locator('h3[data-test="error"]');
     }
 
     public async goto(): Promise<void> {
@@ -39,7 +40,7 @@ export class LoginPage
     }
 
     public async getErrorMessage(): Promise<string | null> {
-        const error = await this.page.textContent(this.errorMessage);
+        const error = await this.errorMessage.textContent();
         return error?.trim() ?? null;
     }
 }
