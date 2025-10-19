@@ -1,4 +1,4 @@
-import { expect, test as setup } from "../../fixtures/test-setup";
+import { test as setup } from "../../fixtures/test-setup";
 
 setup('write login session data', async ({ loginPage, dashboardPage, page }, testInfo) => {
     await loginPage.goto();

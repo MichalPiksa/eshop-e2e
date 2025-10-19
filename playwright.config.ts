@@ -14,7 +14,10 @@ const deviceKeys = [
 
 function makeProjects() {
   const projects = [];
+  const target = process.env.TARGET_DEVICE;
+  const allowed =target ? new Set(target.split(',').map(t => t.trim())) : null;
   for (const dk of deviceKeys) {
+    if (allowed && !allowed.has(dk)) continue;
     const device = (devices as any)[dk];
     const slug = dk.replace(/\s+/g, '-');
     projects.push({
