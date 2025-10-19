@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "pretest": "tsc --noEmit && eslint tests/**",
-    "test": "playwright test"
+    "test": "playwright test",
+    "test:all": "playwright test",
+    "test:firefox": "TARGET_DEVICE='Desktop Firefox' npx playwright test",
+    "test:chrome-and-iphone": "TARGET_DEVICE='Desktop Chrome,iPhone 13' npx playwright test"
   },
   "repository": {
     "type": "git",
