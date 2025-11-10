@@ -50,7 +50,7 @@ export class DashboardPage
         expect(itemCount).toBe(expectedCount);
     }
 
-    public async captureScreenshot(): Promise<void> {
-        await this.page.screenshot({ path: 'screenshots/dashboard-page.png', fullPage: true });
+    public async validateFullPageScreenshot(): Promise<void> {
+        await expect(this.page).toHaveScreenshot('dashboard-page.png', { fullPage: true });
     }
 }
